@@ -2,12 +2,14 @@ package com.core.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -30,24 +32,27 @@ public class Product implements Serializable
    @Column
    private String categoryCode;
 
-   @OneToOne(cascade = CascadeType.ALL, mappedBy = "product", targetEntity = ProductImage.class)
-   private ProductImage image;
+   @Lob
+   @Column
+   private byte[] image;
 
-   @OneToOne(mappedBy = "product", targetEntity = Category.class)
-   private Category category;
+   @Transient
+   private CommonsMultipartFile file;
 
    public Product()
    {
 
    }
 
-   public Product(String productCode, String productName, String productDesc, double productPrice, ProductImage image)
+   public Product(String productCode, String productName, String productDesc, double productPrice, String categoryCode, byte[] image, CommonsMultipartFile file)
    {
 
       this.productCode = productCode;
       this.productName = productName;
       this.productDesc = productDesc;
       this.productPrice = productPrice;
+      this.categoryCode = categoryCode;
+      this.file = file;
       this.image = image;
 
    }
@@ -92,18 +97,41 @@ public class Product implements Serializable
       this.productPrice = productPrice;
    }
 
-   /*
-    * public ProductImage getImage() { return image; } public void setImage(ProductImage image) { this.image = image; } public Category getCategory() { return category; } public void
-    * setCategory(Category category) { this.category = category; }
-    */
-   /*
-    * @Override public String toString() { return "Product [productCode=" + productCode + ", productName=" + productName + ", productDesc=" + productDesc + ", productPrice=" + productPrice +
-    * ", image=" + image + ", category=" + category + "]"; }
-    */
+   public String getCategoryCode()
+   {
+      return categoryCode;
+   }
+
+   public void setCategoryCode(String categoryCode)
+   {
+      this.categoryCode = categoryCode;
+   }
+
+   public byte[] getImage()
+   {
+      return image;
+   }
+
+   public void setImage(byte[] image)
+   {
+      this.image = image;
+   }
+
+   public CommonsMultipartFile getFile()
+   {
+      return file;
+   }
+
+   public void setFile(CommonsMultipartFile file)
+   {
+      this.file = file;
+   }
+
    @Override
    public String toString()
    {
-      return "Product [productCode=" + productCode + ", productName=" + productName + ", productDesc=" + productDesc + ", productPrice=" + productPrice + ", image=" + "]";
+      return "Product [productCode=" + productCode + ", productName=" + productName + ", productDesc=" + productDesc + ", productPrice=" + productPrice + ", image=" + image + ", categoryCode="
+            + categoryCode + "]";
    }
 
 }

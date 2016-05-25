@@ -17,6 +17,8 @@ public class ProductService extends GenericServiceImpl
 
    public Product addProduct(Product product)
    {
+
+      System.out.println(product);
       return repository.saveAndFlush(product);
    }
 

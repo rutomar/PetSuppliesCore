@@ -24,7 +24,7 @@ public class AdminActivityController
    @Autowired
    OrderService orderService;
 
-   @RequestMapping(value = "/users", method = RequestMethod.GET)
+  /* @RequestMapping(value = "/users", method = RequestMethod.GET)
    public List<User> getUsers()
    {
       return userService.findAllUsers();
@@ -60,6 +60,6 @@ public class AdminActivityController
          return order;
       }
       return orderService.updateOrder(order);
-   }
+   }*/
 
 }

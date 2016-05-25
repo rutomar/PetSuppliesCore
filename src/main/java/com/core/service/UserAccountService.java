@@ -56,4 +56,10 @@ public class UserAccountService
       return false;
    }
 
+   public void deleteUser(String userId)
+   {
+      User user = jpaRepository.findOne(userId);
+      jpaRepository.delete(user);
+   }
+
 }

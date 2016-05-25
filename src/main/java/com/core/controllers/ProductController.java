@@ -20,49 +20,48 @@ public class ProductController
    @Autowired
    ProductService productService;
 
-   @RequestMapping(value = "/getProducts", method = RequestMethod.GET)
+   @RequestMapping(value = "/product", method = RequestMethod.GET)
    public List<Product> getProducts()
    {
+      System.out.println("Getting Products");
       return productService.getAllProducts();
    }
 
-   @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+   @RequestMapping(value = "/product", method = RequestMethod.POST)
    public boolean addProduct(@RequestBody Product product, BindingResult errors)
    {
       if (errors.hasErrors())
          return false;
-
+      System.out.println("Adding Products" + product);
       return (productService.addProduct(product) != null) ? true : false;
    }
 
-   @RequestMapping(value = "/updateProduct", method = RequestMethod.PUT)
+   @RequestMapping(value = "/product", method = RequestMethod.PUT)
    public boolean updateProduct(@RequestBody Product product, BindingResult errors)
    {
       if (errors.hasErrors())
          return false;
-
+      System.out.println("Updating Products");
       return (productService.updateProduct(product) != null ? true : false);
    }
 
-   @RequestMapping(value = "/deleteProduct/{productCode}", method = RequestMethod.DELETE)
+   @RequestMapping(value = "/product/{productCode}", method = RequestMethod.DELETE)
    public boolean deleteProduct(@PathVariable String productCode)
    {
       if (!productCode.isEmpty())
       {
+         System.out.println("Deleting Products");
          productService.deleteProduct(productCode);
          return true;
       }
       return false;
    }
 
-   @RequestMapping(value = "/getProduct/{productCode}", method = RequestMethod.GET)
+   @RequestMapping(value = "/product/{productCode}", method = RequestMethod.GET)
    public Product getProduct(@PathVariable String productCode)
    {
-      if (!productCode.isEmpty())
-      {
-         return productService.getProduct(productCode);
-      }
-      return new Product();
+      System.out.println("Getting Product : " + productCode);
+      return productService.getProduct(productCode);
    }
 
 }

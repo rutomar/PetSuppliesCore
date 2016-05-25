@@ -1,6 +1,8 @@
 
 package com.core.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,25 +20,26 @@ public class CategoryController
    @Autowired
    CategoryService categoryService;
 
-   @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+   @RequestMapping(value = "/category", method = RequestMethod.POST)
    public boolean addCategory(@RequestBody Category category, BindingResult errors)
    {
       if (errors.hasErrors())
          return false;
-
+      System.out.println("Adding Category" + category);
       return (categoryService.addCategory(category) != null) ? true : false;
    }
 
-   @RequestMapping(value = "/updateCategory", method = RequestMethod.PUT)
+   @RequestMapping(value = "/category", method = RequestMethod.PUT)
    public boolean updateCategory(@RequestBody Category category, BindingResult errors)
    {
       if (errors.hasErrors())
          return false;
+      System.out.println("Updating Category" + category);
 
       return (categoryService.updateCategory(category) != null) ? true : false;
    }
 
-   @RequestMapping(value = "/deleteCategory/{categoryCode}", method = RequestMethod.DELETE)
+   @RequestMapping(value = "/category/{categoryCode}", method = RequestMethod.DELETE)
    public boolean deleteCategory(@PathVariable String categoryCode)
    {
       if (!categoryCode.isEmpty())
@@ -47,13 +50,20 @@ public class CategoryController
       return false;
    }
 
-   @RequestMapping(value = "/getCategory/{categoryCode}", method = RequestMethod.GET)
+   @RequestMapping(value = "/category/{categoryCode}", method = RequestMethod.GET)
    public Category getCategory(@PathVariable String categoryCode)
    {
-      if (!categoryCode.isEmpty())
-      {
-         return categoryService.getCategory(categoryCode);
-      }
-      return new Category();
+
+      System.out.println("Getting Category with CatCode" + categoryCode);
+      return categoryService.getCategory(categoryCode);
+
+   }
+
+   @RequestMapping(value = "/category", method = RequestMethod.GET)
+   public List<Category> getCategories()
+   {
+      System.out.println("Getting Categories");
+      return categoryService.getAllcategories();
+
    }
 }

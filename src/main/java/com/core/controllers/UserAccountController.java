@@ -1,5 +1,7 @@
 package com.core.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +17,9 @@ import com.core.service.UserAccountService;
 public class UserAccountController
 {
    @Autowired
-   UserAccountService service;
+   UserAccountService userAccountService;
 
-   @RequestMapping(value = "/newUserAccount", method = RequestMethod.POST)
+   @RequestMapping(value = "/user", method = RequestMethod.POST)
    public boolean createUser(@RequestBody User user, BindingResult errors)
    {
       System.out.println("NewUserAccount to be created for " + user);
@@ -25,13 +27,13 @@ public class UserAccountController
       if (errors.hasErrors())
          return false;
 
-      return (service.createUserAccount(user));
+      return (userAccountService.createUserAccount(user));
    }
 
    @RequestMapping(value = "/loginUser/{userId}/{password}", method = RequestMethod.GET)
    public User loginUser(@PathVariable String userId, @PathVariable String password)
    {
-      User user = service.loginUser(userId, password);
+      User user = userAccountService.loginUser(userId, password);
       System.out.println("User Logging in " + user);
       return user;
    }
@@ -39,8 +41,45 @@ public class UserAccountController
    @RequestMapping(value = "/validateUser/{userId}", method = RequestMethod.GET)
    public boolean validateUserId(@PathVariable String userId)
    {
-      return service.isUserExisting(userId);
+      return userAccountService.isUserExisting(userId);
 
+   }
+
+   @RequestMapping(value = "/user", method = RequestMethod.PUT)
+   public boolean updateUser(@RequestBody User user, BindingResult errors)
+   {
+      System.out.println("UpdatingUser Account" + user);
+
+      if (errors.hasErrors())
+         return false;
+
+      return (userAccountService.updateUser(user) != null ? true : false);
+   }
+
+   @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
+   public boolean deleteUser(@PathVariable String userId)
+   {
+      if (!userId.isEmpty())
+      {
+         System.out.println("Deleting user");
+         userAccountService.deleteUser(userId);
+         return true;
+      }
+      return false;
+   }
+
+   @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+   public User getUser(@PathVariable String userId)
+   {
+
+      return userAccountService.findUserById(userId);
+
+   }
+
+   @RequestMapping(value = "/user", method = RequestMethod.GET)
+   public List<User> getUsers()
+   {
+      return userAccountService.findAllUsers();
    }
 
 }
