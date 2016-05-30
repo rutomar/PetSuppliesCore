@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.core.domain.Product;
@@ -62,6 +63,13 @@ public class ProductController
    {
       System.out.println("Getting Product : " + productCode);
       return productService.getProduct(productCode);
+   }
+
+   @RequestMapping(value = "/productCategory", method = RequestMethod.GET)
+   public List<Product> getProductsByCategory(@RequestParam String categoryCode)
+   {
+      System.out.println("Getting Product : " + categoryCode);
+      return productService.getProductsByCategory(categoryCode);
    }
 
 }

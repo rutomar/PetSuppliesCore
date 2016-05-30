@@ -45,9 +45,9 @@ public class ProductService extends GenericServiceImpl
 
    }
 
-   public void getProductByCategory()
+   public List<Product> getProductsByCategory(String categoryCode)
    {
-
+      return repository.findByCategoryCodeLike(categoryCode);
    }
 
 }
