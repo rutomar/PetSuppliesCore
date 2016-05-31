@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.core.domain.Cart;
@@ -34,12 +33,20 @@ public class CartController
       return cartService.getAllCartItemsByUserId(userId);
    }
 
-   @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
-   public boolean removeFromCart(@RequestParam String userId, @RequestParam String productCode)
+   @RequestMapping(value = "/cart/{userProdCode}", method = RequestMethod.DELETE)
+   public boolean removeFromCart(@PathVariable String userProdCode)
    {
 
-      System.out.println("removing item " + productCode);
-      cartService.removeFromCart(userId, productCode);
+      System.out.println("removing item " + userProdCode);
+      cartService.removeFromCart(userProdCode);
       return true;
    }
+
+   @RequestMapping(value = "/cart", method = RequestMethod.PUT)
+   public Cart updateCart(@RequestBody Cart cart)
+   {
+      System.out.println("Inside Add to cart " + cart);
+      return cartService.updateCart(cart);
+   }
+
 }

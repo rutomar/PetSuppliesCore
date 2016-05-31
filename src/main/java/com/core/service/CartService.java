@@ -38,9 +38,14 @@ public class CartService
       return cartJPARepository.findByUserId(userId);
    }
 
-   public void removeFromCart(String userId, String productCode)
+   public void removeFromCart(String userProdCode)
    {
-      cartJPARepository.delete((userId + productCode));
-      //  cartJPARepository.delete(cartPK);
+      cartJPARepository.delete(userProdCode);
    }
+
+   public Cart updateCart(Cart cart)
+   {
+      return cartJPARepository.save(cart);
+   }
+
 }

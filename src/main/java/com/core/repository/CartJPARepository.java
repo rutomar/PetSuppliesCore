@@ -6,14 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.core.domain.Cart;
 
-/*public interface CartJPARepository extends JpaRepository<Cart, String>
-{
-   public Cart findByUserIdAndProductCode(String userId, String productCode);
-
-   public List<Cart> findByUserId(String userId);
-}
-*/
-//@Lazy
 public interface CartJPARepository extends JpaRepository<Cart, String>
 {
 
