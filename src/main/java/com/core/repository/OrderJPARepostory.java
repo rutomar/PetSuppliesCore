@@ -11,4 +11,6 @@ import com.core.domain.ProductOrder;
 public interface OrderJPARepostory extends JpaRepository<ProductOrder, String>
 {
    public List<ProductOrder> findByOrderIdOrUserId(@Param("orderId") String orderId, @Param("userId") String userId);
+
+   public List<ProductOrder> findByUserId(@Param("userId") String userId);
 }

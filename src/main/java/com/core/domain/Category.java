@@ -9,10 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "CATEGORY")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category implements Serializable
 {
+
+   /** * indicates/is used for. */
+
+   private static final long serialVersionUID = -6334158547364912427L;
+
    @Id
    @Column
    private String categoryCode;

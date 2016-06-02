@@ -11,10 +11,17 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "PRODUCT")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product implements Serializable
 {
+
+   /** * indicates/is used for. */
+
+   private static final long serialVersionUID = -7243759586268757312L;
 
    @Id
    @Column
@@ -125,6 +132,35 @@ public class Product implements Serializable
    public void setFile(CommonsMultipartFile file)
    {
       this.file = file;
+   }
+
+   @Override
+   public int hashCode()
+   {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((productCode == null) ? 0 : productCode.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      Product other = (Product) obj;
+      if (productCode == null)
+      {
+         if (other.productCode != null)
+            return false;
+      }
+      else if (!productCode.equals(other.productCode))
+         return false;
+      return true;
    }
 
    @Override

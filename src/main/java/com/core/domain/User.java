@@ -29,6 +29,9 @@ public class User implements Serializable
    @Column
    private String password;
 
+   @Column
+   private String role;
+
    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = Address.class)
    private Address address;
 
@@ -37,13 +40,14 @@ public class User implements Serializable
 
    }
 
-   public User(String userId, String userName, String password, Address address)
+   public User(String userId, String userName, String password, String role, Address address)
    {
 
       this.userId = userId;
       this.userName = userName;
       this.password = password;
       this.address = address;
+      this.role = role;
    }
 
    public String getUserId()
@@ -86,14 +90,24 @@ public class User implements Serializable
       this.address = address;
    }
 
+   public String getRole()
+   {
+      return role;
+   }
+
+   public void setRole(String role)
+   {
+      this.role = role;
+   }
+
    @Override
    public int hashCode()
    {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((password == null) ? 0 : password.hashCode());
+      result = prime * result + ((role == null) ? 0 : role.hashCode());
       result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-      result = prime * result + ((userName == null) ? 0 : userName.hashCode());
       return result;
    }
 
@@ -107,13 +121,19 @@ public class User implements Serializable
       if (getClass() != obj.getClass())
          return false;
       User other = (User) obj;
-
       if (password == null)
       {
          if (other.password != null)
             return false;
       }
       else if (!password.equals(other.password))
+         return false;
+      if (role == null)
+      {
+         if (other.role != null)
+            return false;
+      }
+      else if (!role.equals(other.role))
          return false;
       if (userId == null)
       {
@@ -122,20 +142,13 @@ public class User implements Serializable
       }
       else if (!userId.equals(other.userId))
          return false;
-      if (userName == null)
-      {
-         if (other.userName != null)
-            return false;
-      }
-      else if (!userName.equals(other.userName))
-         return false;
       return true;
    }
 
    @Override
    public String toString()
    {
-      return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", address=" + address + "]";
+      return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role + ", address=" + address + "]";
    }
 
 }

@@ -72,4 +72,11 @@ public class ProductController
       return productService.getProductsByCategory(categoryCode);
    }
 
+   @RequestMapping(value = "/product/productName/{productName}", method = RequestMethod.GET)
+   public List<Product> getProductByProductName(@PathVariable String productName)
+   {
+      System.out.println("Getting Product : " + productName);
+      return productService.getProductsByProductName(productName);
+   }
+
 }

@@ -24,8 +24,8 @@ public class ProductService extends GenericServiceImpl
 
    public void deleteProduct(String productCode)
    {
-      Product product = repository.findOne(productCode);
-      repository.delete(product);
+      //Product product = ;
+      repository.delete(repository.findOne(productCode));
    }
 
    public Product updateProduct(Product product)
@@ -42,6 +42,12 @@ public class ProductService extends GenericServiceImpl
    public Product getProduct(String prodCode)
    {
       return repository.findOne(prodCode);
+
+   }
+
+   public List<Product> getProductsByProductName(String prodName)
+   {
+      return repository.findByProductNameContaining(prodName);
 
    }
 

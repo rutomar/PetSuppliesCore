@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "PRODUCTORDER")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductOrder implements Serializable
 {
 
@@ -114,4 +117,34 @@ public class ProductOrder implements Serializable
    {
       return "Order [orderId=" + orderId + ", userId=" + userId + ", totalPrice=" + totalPrice + ", quantity=" + quantity + ", productCode=" + productCode + ", status=" + status + "]";
    }
+
+   @Override
+   public int hashCode()
+   {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      ProductOrder other = (ProductOrder) obj;
+      if (orderId == null)
+      {
+         if (other.orderId != null)
+            return false;
+      }
+      else if (!orderId.equals(other.orderId))
+         return false;
+      return true;
+   }
+
 }

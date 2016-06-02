@@ -5,6 +5,7 @@ D:\Users\rutomar\workspace\core\src\main\java\com\core\domain\CartPK.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\service\CartService.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\repository\UserJPARepository.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\service\ProductService.java
+D:\Users\rutomar\workspace\core\src\main\java\com\core\controllers\OrderController.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\controllers\CoreServiceController.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\service\CategoryService.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\controllers\CategoryController.java
@@ -18,7 +19,6 @@ D:\Users\rutomar\workspace\core\src\main\java\com\core\controllers\ProductContro
 D:\Users\rutomar\workspace\core\src\main\java\com\core\domain\Product.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\service\OrderService.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\service\UserAccountService.java
-D:\Users\rutomar\workspace\core\src\main\java\com\core\controllers\AdminActivityController.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\domain\User.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\domain\Cart.java
 D:\Users\rutomar\workspace\core\src\main\java\com\core\repository\ProductJPARepository.java

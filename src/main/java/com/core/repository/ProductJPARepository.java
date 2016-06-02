@@ -10,4 +10,6 @@ import com.core.domain.Product;
 public interface ProductJPARepository extends JpaRepository<Product, String>
 {
    public List<Product> findByCategoryCodeLike(String categoryCode);
+
+   public List<Product> findByProductNameContaining(String productName);
 }

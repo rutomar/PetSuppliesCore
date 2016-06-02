@@ -17,7 +17,7 @@ public class UserAccountService
 
    public List<User> findAllUsers()
    {
-      return jpaRepository.findAll();
+      return jpaRepository.findByRole("USER");
    }
 
    public boolean createUserAccount(User user)
@@ -36,7 +36,7 @@ public class UserAccountService
       {
          return user;
       }
-      return new User();
+      return null;
    }
 
    public User findUserById(String userId)

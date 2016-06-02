@@ -27,7 +27,7 @@ public class UserAccountServiceTest extends GenericServiceConfigTest
    @Before
    public void setup()
    {
-      testUser = new User("testUser", "Test", "Test", new Address("testUser", "Nacy Avenue", "test.user@xyz.com", "Newyork"));
+      testUser = new User("testUser", "Test", "Test", "USER", new Address("testUser", "Nacy Avenue", "test.user@xyz.com", "Newyork"));
 
    }
 
@@ -44,6 +44,9 @@ public class UserAccountServiceTest extends GenericServiceConfigTest
       User user = userService.findUserById("testUser");
       Assert.assertNotNull(user);
       Assert.assertEquals("testUser", user.getUserId());
+
+      Assert.assertTrue(userService.isUserExisting("testUser"));
+      Assert.assertFalse(userService.isUserExisting("test"));
    }
 
    @Test
@@ -56,10 +59,34 @@ public class UserAccountServiceTest extends GenericServiceConfigTest
    }
 
    @Test
+   public void testLoginUserNegative()
+   {
+      User user = userService.loginUser("Ashok", testUser.getPassword());
+      Assert.assertNull(user);
+
+   }
+
+   @Test
+   public void testUpdateUser()
+   {
+      testUser.setUserName("Taruna");
+      User user = userService.updateUser(testUser);
+      Assert.assertNotNull(user);
+      Assert.assertEquals("Taruna", user.getUserName());
+      testUser.setUserName("Ruchi");
+      userService.updateUser(testUser);
+   }
+
+   @Test
+   public void testFindAllUsers()
+   {
+      Assert.assertNotEquals(0, userService.findAllUsers().size());
+   }
+
+   @Test
    public void testDeleteUser()
    {
-      repository.delete(testUser);
-
+      userService.deleteUser("testUser");
    }
 
 }
